@@ -1,11 +1,13 @@
 import React from "react";
 import TodoForm from "./TodoForm/TodoFrom";
 import TodoList from "./TodoList/TodoList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Home = () => {
+  const [todos, setTodos] = useState([])
+
+
   const [val, setVal] = useState("");
-  const [todos, setTodos] = useState([]);
   const btnAdd = (inpVal) => {
     console.log("inpVal>>>", inpVal);
     if (inpVal) {
@@ -23,14 +25,27 @@ const Home = () => {
     setTodos([
       ...todos.filter((item)=>item.id !==id)
     ])
+    console.log("todos>>>1",todos)
   };
   const btnToggle = (id) => {
     setTodos([
       ...todos.map((item)=>item.id===id?{...item, complete: !item.complete}:{...item})
     ])
   };
-  const btnChange = () => {};
-  const btnAfterChange = () => {};
+  const btnChange = (id) => {
+    setTodos([
+      ...todos.map((item)=>item.id===id?{...item, change:true}:{...item})
+    ])
+  };
+  const btnAfterChange = (id, val) => {
+    setTodos([
+      ...todos.map((item)=>{
+        return(
+          item.id===id?{...item, change:false, text:val}:{...item}
+        )
+      })
+    ])
+  };
 
   return (
     <>

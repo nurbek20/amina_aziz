@@ -18,13 +18,14 @@ const TodoList = ({
         <input 
         value={val}  
         onChange={(e)=>setVal(e.target.value)}
+        
         type="text" placeholder={item.text} name="" id="" />
         <button onClick={()=>btnAfterChange(item.id, val)}>Change</button>
       </div>
       :
       <div>
         <span onClick={()=>btnToggle(item.id)}>
-            {(item.complete?<del>{item.id}</del>:item.text)}
+            {(item.complete?<del>{item.text}</del>:item.text)}
         </span>
         <button onClick={()=>btnChange(item.id)}>Change</button>
         <button 
